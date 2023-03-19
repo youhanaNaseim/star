@@ -1,6 +1,14 @@
 name: Proxy
 
 on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - 'proxy/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+    - 'proxy/**'
 
 env:
   CARGO_TERM_COLOR: always
@@ -12,7 +20,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Cargo Single Install
+      run: cargo install cargo-single
     - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      run: cargo single run proxy/HelloWorld.rs
+

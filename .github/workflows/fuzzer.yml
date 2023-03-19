@@ -3,8 +3,13 @@ name: Fuzzer
 on:
   push:
     branches: [ "main" ]
+    paths:
+    - 'fuzzer/**'
+
   pull_request:
     branches: [ "main" ]
+    paths:
+    - 'fuzzer/**'
 
 jobs:
   build:
