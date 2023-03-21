@@ -52,6 +52,8 @@ module.exports = async ({github, context, core}) => {
         }
       })
 
+      console.log("PR Result : ", JSON.stringify(pullrequest_result))
+
       if (pullrequest_result) {
         // Check if the pull request was reviewed
       }
