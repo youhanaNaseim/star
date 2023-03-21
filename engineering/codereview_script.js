@@ -63,9 +63,6 @@ module.exports = async ({github, context, core}) => {
           }
         })
 
-        console.log(pullrequest_reviewers_result)
-        console.log(pullrequest_reviewers_result.data)
-
         let reviewers_list = pullrequest_reviewers_result.data
         reviewers_list.forEach(i => {
           if (i.state === "APPROVED") create_card = false
