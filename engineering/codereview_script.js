@@ -56,6 +56,16 @@ module.exports = async ({github, context, core}) => {
 
       if (pullrequest_result) {
         // Check if the pull request was reviewed
+        const pullrequest_reviewers_result = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews',{
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          pull_number: pullrequest_id,
+          headers: {
+            'X-GitHub-Api-Version': '2022-11-28'
+          }
+        })
+
+        console.log("PR Reviews Result : ", JSON.stringify(pullrequest_reviewers_result))
       }
     }
 
