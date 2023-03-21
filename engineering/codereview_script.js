@@ -34,11 +34,11 @@ module.exports = async ({github, context, core}) => {
     let title = "Review commit " + commit_sha
 
     const pullRequests = result.repository.commit.associatedPullRequests.edges
-    if (pullRequests) {
+    if (pullRequests && pullRequests.length > 0) {
       
       console.log("Pull Request Data : ", JSON.stringify(pullRequests))
 
-      let pullrequest_id = pullRequests[0].number
+      let pullrequest_id = pullRequests[0].node.number
 
       console.log("Pull Request Id : ", pullrequest_id)
 
