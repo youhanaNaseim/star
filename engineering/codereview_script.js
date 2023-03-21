@@ -25,7 +25,7 @@ module.exports = async ({github, context, core}) => {
 
     const variables = {
       owner: context.repo.owner,
-      name: context.repo.repo,
+      repo: context.repo.repo,
       sha: commit_sha
     }
     const result = await github.graphql(query, variables)
