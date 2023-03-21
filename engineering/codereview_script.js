@@ -1,10 +1,9 @@
 module.exports = async ({github, context, core}) => {
 
-    // (1) Get commit sha    
+    // Get commit sha    
     let commit_sha = context.sha
-    console.log("Commit : ", commit_sha)
 
-    // (2) Look up pull request by commit sha
+    // Look up pull request by commit sha
     const query = `query associatedPRs($sha: String, $repo: String!, $owner: String!){
       repository(name: $repo, owner: $owner) {
         commit: object(expression: $sha) {
@@ -29,14 +28,32 @@ module.exports = async ({github, context, core}) => {
       sha: commit_sha
     }
     const result = await github.graphql(query, variables)
-    console.log("Result : ", JSON.stringify(result))
 
-    const pullRequests = result.repository.commit.associatedPullRequests
-    console.log("Pull Request : ", JSON.stringify(pullRequests))
+    let create_card = true
+    let review_url = context.payload.compare
+    let title = "Review commit " + commit_sha
 
-    // (3) If no pull request then this is a push (create card = true)
+    const pullRequests = result.repository.commit.associatedPullRequests.edges
+    if (pullRequests) {
+      let pullrequest_id = pullRequests[0].number
 
-    // (4) If there is a pull request , check if there are any approved reviewers (create card = !approved reviewers)
+      console.log("Pull Request Id : ", pullrequest_id)
 
-    // (5) If create card , create the card on the review board
+      // Retrieve pull request object & inspect approvers
+      const pullrequest_result = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}',{
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        pull_number: pullrequest_id,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
+      })
+
+      console.log("Result : ", JSON.stringify(pullrequest_result))
+
+    }
+
+    // If create card , create the card on the review board
+    console.log("Title : ", title)
+    console.log("Review Url : ", review_url)
   }
