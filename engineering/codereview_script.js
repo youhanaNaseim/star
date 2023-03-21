@@ -35,6 +35,9 @@ module.exports = async ({github, context, core}) => {
 
     const pullRequests = result.repository.commit.associatedPullRequests.edges
     if (pullRequests) {
+      
+      console.log("Pull Request Data : ", JSON.stringify(pullRequests))
+
       let pullrequest_id = pullRequests[0].number
 
       console.log("Pull Request Id : ", pullrequest_id)
