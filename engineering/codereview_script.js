@@ -31,10 +31,10 @@ module.exports = async ({github, context, core}) => {
     const result = await github.graphql(query, variables)
     console.log("Result : ", JSON.stringify(result))
 
-    // (3) If no pull request then this is a push (create card = true)
     const pullRequests = result.repository.commit.associatedPullRequests
     console.log("Pull Request : ", JSON.stringify(pullRequests))
 
+    // (3) If no pull request then this is a push (create card = true)
 
     // (4) If there is a pull request , check if there are any approved reviewers (create card = !approved reviewers)
 
