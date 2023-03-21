@@ -52,11 +52,15 @@ module.exports = async ({github, context, core}) => {
         }
       })
 
-      console.log("Result : ", JSON.stringify(pullrequest_result))
+      console.log("PR Result : ", JSON.stringify(pullrequest_result))
 
+      if (pullrequest_result) {
+        // Check if the pull request was reviewed
+      }
     }
 
     // If create card , create the card on the review board
+    console.log("Create Card : ", create_card)
     console.log("Title : ", title)
     console.log("Review Url : ", review_url)
   }
