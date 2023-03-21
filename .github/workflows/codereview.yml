@@ -1,6 +1,7 @@
 name: Code Review Checker
 
 on: push
+    branches: [ "main" ]
 
 jobs:
   echo-input:
