@@ -35,12 +35,8 @@ module.exports = async ({github, context, core}) => {
 
     const pullRequests = result.repository.commit.associatedPullRequests.edges
     if (pullRequests && pullRequests.length > 0) {
-      
-      console.log("Pull Request Data : ", JSON.stringify(pullRequests))
 
       let pullrequest_id = pullRequests[0].node.number
-
-      console.log("Pull Request Id : ", pullrequest_id)
 
       // Retrieve pull request object & inspect approvers
       const pullrequest_result = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}',{
@@ -52,9 +48,11 @@ module.exports = async ({github, context, core}) => {
         }
       })
 
-      console.log("PR Result : ", JSON.stringify(pullrequest_result))
-
       if (pullrequest_result) {
+
+        title = "Review pull request " + pullrequest_id
+        review_url = pullrequest_result.data.diff_url
+
         // Check if the pull request was reviewed
         const pullrequest_reviewers_result = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews',{
           owner: context.repo.owner,
@@ -65,7 +63,10 @@ module.exports = async ({github, context, core}) => {
           }
         })
 
-        console.log("PR Reviews Result : ", JSON.stringify(pullrequest_reviewers_result))
+        let reviewers_list = pullrequest_reviewers_result.data
+        reviewers_list.array.forEach(i => {
+          if (i.state === "APPROVED") create_card = false
+        });
       }
     }
 
