@@ -87,7 +87,7 @@ module.exports = async ({github, context, core}) => {
     })
 
     const projectId = 1
-    const contentId = issue?.node_id
+    const contentId = issue.data.node_id
 
     const addResp = await github.graphql(
       `mutation addIssueToProject($input: AddProjectV2ItemByIdInput!) {
