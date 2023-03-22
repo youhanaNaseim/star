@@ -89,7 +89,7 @@ module.exports = async ({github, context, core}) => {
     const projectId = 1
     const contentId = issue?.node_id
 
-    const addResp = await octokit.graphql(
+    const addResp = await github.graphql(
       `mutation addIssueToProject($input: AddProjectV2ItemByIdInput!) {
         addProjectV2ItemById(input: $input) {
           item {
