@@ -93,7 +93,7 @@ module.exports = async ({github, context, core}) => {
 
     const idResp = await github.graphql(
       `query getProject($projectOwnerName: String!, $projectNumber: Int!) {
-        user(login: $projectOwnerName) {
+        users(login: $projectOwnerName) {
           projectV2(number: $projectNumber) {
             id
           }
