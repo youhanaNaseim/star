@@ -51,7 +51,7 @@ module.exports = async ({github, context, core}) => {
       if (pullrequest_result) {
 
         title = "Review pull request " + pullrequest_id
-        review_url = pullrequest_result.data.diff_url
+        review_url = pullrequest_result.data.html_url
 
         // Check if the pull request was reviewed
         const pullrequest_reviewers_result = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews',{
@@ -74,4 +74,14 @@ module.exports = async ({github, context, core}) => {
     console.log("Create Card : ", create_card)
     console.log("Title : ", title)
     console.log("Review Url : ", review_url)
+
+    // Get columns 
+    const project_columns = await github.request('GET /projects/{project_id}/columns', {
+      project_id: 1,
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    })
+
+    console.log(JSON.stringify(project_columns))
   }
