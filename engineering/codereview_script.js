@@ -86,7 +86,26 @@ module.exports = async ({github, context, core}) => {
       }
     })
 
-    const projectId = 1
+    let projectOwnerName = context.repo.owner
+    let projectNumber = 1
+
+    console.log("Proj Owner Name : ", projectOwnerName, "Proj Number : ", projectNumber)
+
+    const idResp = await github.graphql(
+      `query getProject($projectOwnerName: String!, $projectNumber: Int!) {
+        user(login: $projectOwnerName) {
+          projectV2(number: $projectNumber) {
+            id
+          }
+        }
+      }`,
+      {
+        projectOwnerName,
+        projectNumber,
+      },
+    )
+
+    const projectId = idResp[ownerTypeQuery]?.projectV2.id
     const contentId = issue.data.node_id
 
     console.log("Project Id : ", projectId, "Content Id : ", contentId)
@@ -106,6 +125,4 @@ module.exports = async ({github, context, core}) => {
         },
       },
     )
-
-    console.log(JSON.stringify(addResp))
   }
