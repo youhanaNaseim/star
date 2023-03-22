@@ -77,6 +77,8 @@ module.exports = async ({github, context, core}) => {
 
     // Get columns 
     const project_columns = await github.request('GET /projects/{project_id}/columns', {
+      owner: context.repo.owner,
+      repo: context.repo.repo,
       project_id: 1,
       headers: {
         'X-GitHub-Api-Version': '2022-11-28'
