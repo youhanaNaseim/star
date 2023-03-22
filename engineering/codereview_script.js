@@ -75,15 +75,16 @@ module.exports = async ({github, context, core}) => {
     console.log("Title : ", title)
     console.log("Review Url : ", review_url)
 
-    // Get columns 
-    const project_columns = await github.request('GET /projects/{project_id}/columns', {
+    // Create an issue for the unreviewed work
+    const issue = await github.request('POST /repos/{owner}/{repo}/issues', {
       owner: context.repo.owner,
       repo: context.repo.repo,
-      project_id: 1,
+      title: title,
+      body: review_url,
       headers: {
         'X-GitHub-Api-Version': '2022-11-28'
       }
     })
 
-    console.log(JSON.stringify(project_columns))
+    console.log(JSON.stringify(issue))
   }
