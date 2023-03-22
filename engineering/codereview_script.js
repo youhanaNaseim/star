@@ -91,21 +91,17 @@ module.exports = async ({github, context, core}) => {
 
     console.log("Proj Owner Name : ", projectOwnerName, "Proj Number : ", projectNumber)
 
-    const idResp = await github.graphql(
-      `query getProject($projectOwnerName: String!, $projectNumber: Int!) {
-        users(login: $projectOwnerName) {
-          projectV2(number: $projectNumber) {
-            id
-          }
-        }
-      }`,
-      {
-        projectOwnerName,
-        projectNumber,
-      },
-    )
+    const idResp = await github.request('GET /users/{owner}/projects/{id}', {
+      owner: context.repo.owner,
+      id: projectNumber,
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    })
 
-    const projectId = idResp[ownerTypeQuery]?.projectV2.id
+    console.log(idResp)
+
+    const projectId = idResp.data.projectV2.id
     const contentId = issue.data.node_id
 
     console.log("Project Id : ", projectId, "Content Id : ", contentId)
