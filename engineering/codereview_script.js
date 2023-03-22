@@ -91,9 +91,9 @@ module.exports = async ({github, context, core}) => {
 
     console.log("Proj Owner Name : ", projectOwnerName, "Proj Number : ", projectNumber)
 
-    const idResp = await github.request('GET /users/{owner}/projects/{id}', {
+    const idResp = await github.request('GET /projects/{project_id}', {
       owner: context.repo.owner,
-      id: projectNumber,
+      project_id: projectNumber,
       headers: {
         'X-GitHub-Api-Version': '2022-11-28'
       }
