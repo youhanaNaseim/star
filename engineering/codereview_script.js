@@ -86,5 +86,24 @@ module.exports = async ({github, context, core}) => {
       }
     })
 
-    console.log(JSON.stringify(issue))
+    const projectId = 1
+    const contentId = issue?.node_id
+
+    const addResp = await octokit.graphql(
+      `mutation addIssueToProject($input: AddProjectV2ItemByIdInput!) {
+        addProjectV2ItemById(input: $input) {
+          item {
+            id
+          }
+        }
+      }`,
+      {
+        input: {
+          projectId,
+          contentId,
+        },
+      },
+    )
+
+    console.log(JSON.stringify(addResp))
   }
