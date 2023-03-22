@@ -75,50 +75,16 @@ module.exports = async ({github, context, core}) => {
     console.log("Title : ", title)
     console.log("Review Url : ", review_url)
 
-    // Create an issue for the unreviewed work
-    const issue = await github.request('POST /repos/{owner}/{repo}/issues', {
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      title: title,
-      body: review_url,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    })
-
-    let projectOwnerName = context.repo.owner
-    let projectNumber = 1
-
-    console.log("Proj Owner Name : ", projectOwnerName, "Proj Number : ", projectNumber)
-
-    const idResp = await github.request('GET /projects/{project_id}', {
-      owner: context.repo.owner,
-      project_id: projectNumber,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    })
-
-    console.log(idResp)
-
-    const projectId = idResp.data.projectV2.id
-    const contentId = issue.data.node_id
-
-    console.log("Project Id : ", projectId, "Content Id : ", contentId)
-
-    const addResp = await github.graphql(
-      `mutation addIssueToProject($input: AddProjectV2ItemByIdInput!) {
-        addProjectV2ItemById(input: $input) {
-          item {
-            id
-          }
+    if (create_card) {
+      // Create an issue for the unreviewed work
+      const issue = await github.request('POST /repos/{owner}/{repo}/issues', {
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        title: title,
+        body: review_url,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
         }
-      }`,
-      {
-        input: {
-          projectId: projectId,
-          contentId: contentId,
-        },
-      },
-    )
+      })
+    }
   }
