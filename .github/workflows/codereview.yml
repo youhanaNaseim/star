@@ -17,7 +17,7 @@ jobs:
           script: |
             const script = require('./engineering/codereview_script.js')
             await script({github, context, core})
-      - uses: actions/add-to-project@RELEASE_VERSION
+      - uses: actions/add-to-project@main
         with:
           project-url: https://github.com/users/youhanaNaseim/projects/3
           labeled: needs-review
