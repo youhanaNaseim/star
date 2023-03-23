@@ -1,4 +1,4 @@
-name: Create Issue on Merged PR without Approvals
+name: [ChatGPT Generated] [Broken] Create Issue on Merged PR without Approvals
 
 on:
   pull_request:
