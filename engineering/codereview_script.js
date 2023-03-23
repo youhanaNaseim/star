@@ -82,6 +82,7 @@ module.exports = async ({github, context, core}) => {
         repo: context.repo.repo,
         title: title,
         body: review_url,
+        labels: ['needs-review'],
         headers: {
           'X-GitHub-Api-Version': '2022-11-28'
         }
