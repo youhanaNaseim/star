@@ -1,4 +1,4 @@
-name: Code Review Verifier
+name: Code review verifier
 
 on: 
   push:
