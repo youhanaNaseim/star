@@ -15,6 +15,9 @@ jobs:
           cd /home/youhana/src/star/
           uname -a
           pwd
+          direnv
           direnv reload
+          direnv
+          pwd
         env:
           NOTENOOK: ${{ inputs.notebook_name }}
