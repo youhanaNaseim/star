@@ -1,4 +1,4 @@
-name: Code Review Checker
+name: Code Review Verifier
 
 on: 
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   echo-input:
-    runs-on: youhana-mac
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
