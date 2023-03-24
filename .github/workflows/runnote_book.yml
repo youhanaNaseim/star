@@ -16,7 +16,13 @@ jobs:
     steps:
       - run: |
           cd /home/youhananaseim/Source/star/
+          uname -a
           pwd
-          echo "Run $NOTENOOK"
+          if [ -z "${VAR}" ];
+          then
+            echo "RUN Default Notebook"
+          else
+            echo "Run $NOTENOOK"
+          fi
         env:
           NOTENOOK: ${{ inputs.notebook_name }}
