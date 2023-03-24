@@ -16,7 +16,9 @@ jobs:
           uname -a
           pwd
           direnv reload
-          nix-build --no-out-link tools/customer_command.nix
+          echo "*****************************************"
+          nix-store --query --requisites /run/current-system |  sort | uniq
+          echo "*****************************************"
           customer woodchipper.local
         env:
           NOTENOOK: ${{ inputs.notebook_name }}
