@@ -12,5 +12,9 @@ jobs:
     steps:
       - run: |
           echo "Message: $MESSAGE"
+          pwd
+          cd /home/youhananaseim/Source/star/
+          pwd
+          uname -a
         env:
           MESSAGE: ${{ inputs.message }}
