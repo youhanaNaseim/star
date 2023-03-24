@@ -18,7 +18,7 @@ jobs:
           cd /home/youhananaseim/Source/star/
           uname -a
           pwd
-          if [ -z "${VAR}" ];
+          if [ -z "$NOTENOOK" ];
           then
             echo "RUN Default Notebook"
           else
