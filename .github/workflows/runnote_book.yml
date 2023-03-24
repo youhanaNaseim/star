@@ -14,7 +14,7 @@ on:
 
 jobs:
   log-the-inputs:
-    runs-on: youhana-mac
+    runs-on: youhana-nix
     steps:
       - run: |
           cd /home/youhana/src/star/
