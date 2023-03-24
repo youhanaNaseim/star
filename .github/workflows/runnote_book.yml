@@ -7,8 +7,8 @@ on:
         description: 'Pick Notebook to run or specify name'
         type: choice
         options:
-        - webhook/headless_pbt__local.nb2
-        - webhook/headless_pbt__short.nb2
+        - headless_pbt__local.nb2
+        - headless_pbt__short.nb2
       notebook_name:
         description: 'Notebook to run'
 
