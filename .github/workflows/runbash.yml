@@ -1,0 +1,18 @@
+name: Run command
+
+on:
+  workflow_dispatch:
+      message:
+        description: 'Message to print'
+        required: true
+
+jobs:
+  log-the-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Log level: $MESSAGE"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+        env:
+          MESSAGE: ${{ inputs.message }}
