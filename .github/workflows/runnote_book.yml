@@ -15,9 +15,8 @@ jobs:
           cd /home/youhana/src/star/
           uname -a
           pwd
-          direnv
           direnv reload
-          direnv
-          pwd
+          nix-biuld --no-out-link tools/customer_command.nix
+          customer woodchipper.local
         env:
           NOTENOOK: ${{ inputs.notebook_name }}
