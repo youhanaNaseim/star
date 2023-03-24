@@ -3,14 +3,9 @@ name: Run notebook
 on:
   workflow_dispatch:
     inputs:
-      picked_notebook:
-        description: 'Pick Notebook to run or specify name'
-        type: choice
-        options:
-        - headless_pbt__local.nb2
-        - headless_pbt__short.nb2
       notebook_name:
         description: 'Notebook to run'
+        required: true
 
 jobs:
   log-the-inputs:
@@ -20,12 +15,6 @@ jobs:
           cd /home/youhana/src/star/
           uname -a
           pwd
-          if [ -z "$PICKEDNOTEBOOK" ];
-          then
-            echo "Running Notebook : $PICKEDNOTEBOOK"
-          else
-            echo "Running Notebook : $NOTENOOK"
-          fi
+          customer notebook.run $NOTENOOK
         env:
-          PICKEDNOTEBOOK: ${{ inputs.picked_notebook }}
           NOTENOOK: ${{ inputs.notebook_name }}
