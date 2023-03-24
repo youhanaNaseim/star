@@ -16,7 +16,7 @@ jobs:
           uname -a
           pwd
           direnv reload
-          nix-biuld --no-out-link tools/customer_command.nix
+          nix-build --no-out-link tools/customer_command.nix
           customer woodchipper.local
         env:
           NOTENOOK: ${{ inputs.notebook_name }}
