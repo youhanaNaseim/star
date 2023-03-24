@@ -17,6 +17,7 @@ jobs:
           pwd
           direnv reload
           echo "*****************************************"
+          nix-shell -p glibc
           nix-store --query --requisites /run/current-system |  sort | uniq
           echo "*****************************************"
         env:
