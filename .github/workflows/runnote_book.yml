@@ -20,12 +20,12 @@ jobs:
           cd /home/youhana/src/star/
           uname -a
           pwd
-          if [ -z "$PICKED_NOTEBOOK" ];
+          if [ -z "$PICKEDNOTEBOOK" ];
           then
-            echo "Running Notebook : $PICKED_NOTEBOOK"
+            echo "Running Notebook : $PICKEDNOTEBOOK"
           else
             echo "Running Notebook : $NOTENOOK"
           fi
         env:
-          PICKED_NOTEBOOK: ${{ inputs.picked_notebook }}
+          PICKEDNOTEBOOK: ${{ inputs.picked_notebook }}
           NOTENOOK: ${{ inputs.notebook_name }}
