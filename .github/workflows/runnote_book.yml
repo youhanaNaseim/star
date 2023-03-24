@@ -16,7 +16,5 @@ jobs:
           uname -a
           pwd
           direnv reload
-          customer woodchipper.local
-          customer notebook.run $NOTENOOK
         env:
           NOTENOOK: ${{ inputs.notebook_name }}
