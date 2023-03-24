@@ -1,12 +1,14 @@
 name: Run notebook
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
     inputs:
+      picked_notebook:
+        description: 'Pick Notebook to run or specify name'
+        type: choice
+        options:
+        - webhook/headless_pbt__local.nb2
+        - webhook/headless_pbt__short.nb2
       notebook_name:
         description: 'Notebook to run'
 
@@ -15,14 +17,15 @@ jobs:
     runs-on: youhana-mac
     steps:
       - run: |
-          cd /home/youhananaseim/Source/star/
+          cd /home/youhana/src/star/
           uname -a
           pwd
-          if [ -z "$NOTENOOK" ];
+          if [ -z "$PICKED_NOTEBOOK" ];
           then
-            echo "RUN Default Notebook"
+            echo "Running Notebook : $PICKED_NOTEBOOK"
           else
-            echo "Run $NOTENOOK"
+            echo "Running Notebook : $NOTENOOK"
           fi
         env:
+          PICKED_NOTEBOOK: ${{ inputs.picked_notebook }}
           NOTENOOK: ${{ inputs.notebook_name }}
