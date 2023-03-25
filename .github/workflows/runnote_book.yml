@@ -12,11 +12,11 @@ jobs:
     runs-on: youhana-mac
     steps:
       - run: |
-          cd /home/youhana/src/star/
+          cd /home/youhananaseim/Source/star/
           uname -a
           pwd
           direnv reload
-          echo "*****************************************"
+          echo "***************************************** $NOTEBOOK"
           nix-store --query --requisites /run/current-system |  sort | uniq
           echo "*****************************************"
         env:
