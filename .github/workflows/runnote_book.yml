@@ -15,7 +15,6 @@ jobs:
           cd /home/youhananaseim/Source/star/
           uname -a
           pwd
-          direnv reload
           echo "***************************************** $NOTEBOOK"
           nix-store --query --requisites /run/current-system |  sort | uniq
           echo "*****************************************"
