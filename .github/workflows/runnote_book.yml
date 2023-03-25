@@ -9,7 +9,7 @@ on:
 
 jobs:
   log-the-inputs:
-    runs-on: youhana-nix
+    runs-on: youhana-mac
     steps:
       - run: |
           cd /home/youhana/src/star/
@@ -17,7 +17,6 @@ jobs:
           pwd
           direnv reload
           echo "*****************************************"
-          nix-shell -p glibc
           nix-store --query --requisites /run/current-system |  sort | uniq
           echo "*****************************************"
         env:
