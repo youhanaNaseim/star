@@ -1,4 +1,4 @@
-name: Fuzzer
+name: Build Fuzzer
 
 on:
   push:
